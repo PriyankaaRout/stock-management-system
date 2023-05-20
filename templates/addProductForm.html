@@ -1,0 +1,21 @@
+<html>
+    <head>
+        <title>addProducts</title>
+    </head>
+    <form action='addProductForm' method='post' enctype="multipart/form-data">{% csrf_token %}
+        enter the following product details : <br><br><br>
+        name :<br>
+        <input type="text" name="name" id="name" size=20><br>
+        sku :<br>
+        <input type="text" name="sku" id="sku" size=10><br>
+        price :<br>
+        <input type="text" name="price" id="price" size=10><br>
+        quantity :<br>
+        <input type="text" name="quantity" id="quantity" size=10><br>
+        image :<br>
+        <input type="file" name="image" id="image"><br>
+
+        <input type="submit" name="submit" value="Add product"><br>
+    </form>
+    <button><a href="productTable">Products</a></button>
+</html>

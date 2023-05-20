@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <title>Products</title>
+</head>
+<body>
+    {%if request.user.is_authenticated %}
+    <p align="center"><font size=7 color="red" ><b>RETAILER TABLE</b></font></p><br>
+    <div class="container">
+        <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>sl no.</th>
+                <th>Name</th>
+                <th>SKU</th>
+                <th>price</th>
+                <th>availability</th>
+                <th>image</th>
+                <th>action</th>
+              </tr>
+            </thead>
+            <tbody>
+                {% for data in form %}
+                {%csrf_token%}
+                <tr>
+                    <td>{{forloop.counter}}</td>
+                    <td>{{data.prod_name}}</td>
+                    <td>{{data.prod_sku}}</td>
+                    <td>{{data.prod_price}}</td>
+                    <td>{{data.prod_quantity}}</td>
+                    <td><img src="/media/{{data.prod_image}}" width="150"></td>
+                    <td>
+                        <form action='buyProduct/{{data.id}}' method='post' enctype="multipart/form-data">
+                            {% csrf_token %}
+                            select quantity
+                            <input type="text" name="selectedQuantity" id="selectedQuantity" size=5><br>
+                            <button type="submit" value="submit">buy now</button>
+                        </form>
+                        
+                </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table> 
+    </div>
+    <div>
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+              <li class="page-item"><a class="page-link" href="?pageNo={{prevpage}}">Previous</a></li>
+              {%for i in totpage%}
+              <li class="page-item"><a class="page-link" href="?pageNo={{i}}">{{i}}</a></li>
+              {%endfor%}
+              <li class="page-item"><a class="page-link" href="?pageNo={{nextpage}}">Next</a></li>
+            </ul>
+          </nav>
+    </div>
+    <button><a href="logout">Log out</a></button>
+    {%endif%}
+</body>
+</html>

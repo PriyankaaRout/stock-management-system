@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>showProductRow</title>
+</head>
+<body>
+    <div>
+        <form action='editProductRow/{{data.id}}' method='post' enctype="multipart/form-data">
+            {% csrf_token %}
+            <input type="text" value="{{data.prod_name}}" name="name"><br>
+            <input type="text" value="{{data.prod_sku}}" name="sku"><br>
+            <input type="text" value="{{data.prod_price}}" name="price"><br>
+            <input type="text" value="{{data.prod_quantity}}" name="quantity"><br>
+            <input type="file" value="{{data.prod_image}}" name="image"><br>
+            <button type="submit" value="submit">save changes</button>
+        </form>
+    </div>
+</body>
+</html>
